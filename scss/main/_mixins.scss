@@ -1,0 +1,146 @@
+////////////////////////////////////////
+/////////  HELPFUL MIXINS
+////////////////////////////////////////
+
+
+// @font-face mixin
+// Order of the includes matters, and it is: normal, bold, italic, bold+italic.
+// Forked from Bourbon. https://github.com/thoughtbot/bourbon/
+@mixin font-face($font-family, $file-path, $weight: normal, $style: normal) {
+	@font-face {
+		font-family: $font-family;
+		font-weight: $weight;
+		font-style: $style;
+
+		src: url('#{$file-path}.eot');
+		src: url('#{$file-path}.eot?#iefix') format('embedded-opentype'),
+		     url('#{$file-path}.woff') format('woff'),
+		     url('#{$file-path}.ttf') format('truetype'),
+		     url('#{$file-path}.svg##{$font-family}') format('svg');
+	}
+}
+
+// Strip units from values
+@function strip-unit($num) {
+ 	@return $num / ($num * 0 + 1);
+}
+
+// Calculate rems from pixels with px fallback
+// @include font-size(14);
+
+@mixin font-size($px) {
+	$px: strip-unit($px);
+	$base: strip-unit($base-size);
+	font-size: ($px) + px;
+	font-size: ($px / $base) * 1rem;
+}
+
+// Media queries mixin
+// @include mq(bps);
+
+@mixin mq($canvas) {
+	@if $canvas == bpxxs {
+		@media only screen and (min-width: $bpxxs) {
+			@content;
+		}
+	} 
+	@else if $canvas == bpxs {
+		@media only screen and (min-width: $bpxs) {
+			@content;
+		}
+	}
+	@else if $canvas == bps {
+		@media only screen and (min-width: $bps) {
+			@content;
+		}
+	}
+	@else if $canvas == bpm {
+		@media only screen and (min-width: $bpm) {
+			@content;
+		}
+	}
+	@else if $canvas == bpl {
+		@media only screen and (min-width: $bpl) {
+			@content;
+		}
+	}
+	@else if $canvas == bpxl {
+		@media only screen and (min-width: $bpxl) {
+			@content;
+		}
+	}
+	@else if $canvas == bpxxl {
+		@media only screen and (min-width: $bpxxl) {
+			@content;
+		}
+	}
+}
+
+// SVG Background image mixin
+// @include background-image('icon-name')
+$image-path: '../../img' !default;
+$fallback-extension: 'png' !default;
+$retina-suffix: '@2x';
+@mixin background-image($name, $size:false, $type:false, $name2:false){
+	@if($name != 'none'){
+	    @if($type == 'png'){
+	    	@if($name2){
+	    		background-image: url(#{$image-path}/#{$name}.png), url(#{$image-path}/#{$name2}.png);
+	    	} @else {
+				background-image: url(#{$image-path}/#{$name}.png);
+	    	}
+	    	
+	    } @elseif($type == 'jpg'){
+	    	@if($name2){
+				background-image: url(#{$image-path}/#{$name}.jpg), url(#{$image-path}/#{$name2}.jpg);
+	    	} @else {
+				background-image: url(#{$image-path}/#{$name}.jpg);
+	    	}
+	    	
+	    } @else {
+	    	@if($name2){
+				background-image: url(#{$image-path}/#{$name}.svg), url(#{$image-path}/#{$name2}.svg);
+	    	} @else {
+				background-image: url(#{$image-path}/#{$name}.svg);
+	    	}
+	    	
+	    }
+	    @if($size){
+	        background-size: $size;
+	    }
+	    .no-svg &{
+	    	@if($name2){
+	    		background-image: url(#{$image-path}/#{$name}.#{$fallback-extension}), url(#{$image-path}/#{$name2}.#{$fallback-extension});
+	    	} @else {
+				background-image: url(#{$image-path}/#{$name}.#{$fallback-extension});
+	    	}
+	        
+
+	        @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
+	        	
+	        	@if($name2){
+	        		background-image: url(#{$image-path}/#{$name}#{$retina-suffix}.#{$fallback-extension}), url(#{$image-path}/#{$name2}#{$retina-suffix}.#{$fallback-extension});
+	        	} @else {
+					background-image: url(#{$image-path}/#{$name}#{$retina-suffix}.#{$fallback-extension});
+	        	}
+	        }
+	    }
+    }
+    @if ($name == 'none') {
+		background-image:none;
+    }
+}
+
+// Clearfix mixin
+// @extend %clearfix;
+
+%clearfix {
+ 	*zoom: 1;
+ 	&:before, &:after {
+    	content: " ";
+    	display: table;
+  	}
+  	&:after {
+    	clear: both;
+  	}
+}

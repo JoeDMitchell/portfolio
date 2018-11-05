@@ -1,0 +1,368 @@
+////////////////////////////////////////
+/////////  STYLES APPLYING TO ELEMENTS ONLY ON A SINGLE PAGE
+////////////////////////////////////////
+
+/////// HOMEPAGE
+
+// .octa {
+// 	position: absolute;
+// 	transform-style: preserve-3d;
+// 	// -webkit-animation: rotate-globe 30s infinite; */
+// 	// animation: rotate-globe 30s linear 0s infinite;
+// 	transform-origin: center center;
+// 	width: 310px;
+// 	height: 500px;
+// 	transform: rotateX(30deg) rotateY(400deg) rotateZ(360deg) translate(-50%,-50%);
+// 	top:50%;
+// 	left:50%;
+
+// 	.face {
+// 		transform-origin: 50% 0%;
+// 		position: absolute;
+		
+
+// 		img {
+// 			clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+// 			width:400px;
+// 			height:300px;
+			
+// 		}
+
+// 		&.bottom {
+// 			transform-origin: 50% 100%;
+
+// 			img {
+// 				clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+// 			}
+// 		}
+// 	}
+
+// 	.face--1 {
+// 		transform: rotateY(0deg) translateZ(0px) rotateX(31deg);
+// 	}
+
+// 	.face--2 {
+// 		transform: rotateY(90deg) translateZ(0px) rotateX(31deg);
+// 	}
+
+// 	.face--3 {
+// 		transform: rotateY(180deg) translateZ(0px) rotateX(31deg);
+// 	}
+
+// 	.face--4 {
+// 		transform: rotateY(270deg) translateZ(0px) rotateX(31deg);
+// 	}
+
+// 	.face--5 {
+// 		transform: rotateY(0deg) translateY( 214px) translateZ(0px) rotateX(31deg);
+// 	}
+
+// 	.face--6 {
+// 		transform: rotateY(90deg) translateY( 214px) translateZ(0px) rotateX(31deg);
+// 	}
+
+// 	.face--7 {
+// 		transform: rotateY(180deg) translateY( 214px) translateZ(0px) rotateX(31deg);
+// 	}
+
+// 	.face--8 {
+// 		transform: rotateY(270deg) translateY( 214px) translateZ(0px) rotateX(31deg);
+// 	}
+// }
+.shape-holder {
+	position: relative;
+	width:53%;
+	height:80%;
+	left:50%;
+	top:50%;
+	@include transform(translate(-50%,-50%));
+	@include perspective( 100vw );
+	@include transform-style( preserve-3d );
+}
+
+.octa {
+	position:relative;
+	left:0%;
+	top:0%;
+	width:100%;
+	height:100%;
+	@include transform-style( preserve-3d );
+	@include transform(rotateX(45deg) rotateY(0deg) rotateZ(45deg));
+	@include animation( octa 10.0s forwards infinite );
+
+	.half {
+		width:57.14%;
+		position:absolute;
+		left:0;
+		top:0;
+		height:100%;
+		@include transform-style( preserve-3d );
+
+		&.half--2 {
+			@include transform-origin( 50%, 50% );
+			@include transform(rotateZ(60deg));
+			left: 53.7%;
+			top: -25%;
+		}
+
+		.half__fold {
+			width:100%;
+			height:100%;
+			position:absolute;
+			top:0;
+			left:0;
+			@include transform(rotateX(-70.5deg));
+			@include transform-origin(50%, 100%);
+			@include transform-style( preserve-3d );
+			@include animation( half-fold 10.0s forwards infinite );
+		}
+	}
+
+	.quarter {
+		width:75%;
+		height:33.33%;
+		position:absolute;
+		left:0;
+		top:33.33%;
+		@include transform(rotateZ(120deg));
+		@include transform-origin( 50%, 50% );
+		@include transform-style( preserve-3d );
+
+		.quarter__fold {
+			width:100%;
+			height:100%;
+			position:absolute;
+			top:0;
+			left:0;
+			@include transform(rotateX(70.5deg));
+			@include animation( side-3 10.0s forwards infinite );
+			@include transform-origin(50%,0%);
+			@include transform-style( preserve-3d );
+		}
+
+		.face {
+			width:66.66%;
+			height:100%;
+		}
+	}
+
+	.quarter--2 {
+		@include transform(rotateZ(60deg));
+		top: 50%;
+		left: 37.5%;
+
+		.quarter__fold {
+			@include transform(rotateX(-70.5deg));
+			@include animation( side-4 10.0s forwards infinite );
+			@include transform-origin(50%,100%);
+		}
+	}
+
+	.face {
+		width:50%;
+		height:33.33%;
+		position:absolute;
+		@include transform-style( preserve-3d );
+		@include transform-origin( 50%, 66.66% );
+
+		img {
+			clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+			height:100%;
+			width:100%;
+		}
+
+	}
+
+	.face--1 {
+		left:0;
+		top:0;
+		transform: rotateZ(120deg);
+		@include transform-origin( 50%, 33.33% );
+
+		img {
+			clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+		}
+	}
+
+	.face--2 {
+		top:0%;
+		left:33.33%;
+		@include transform(rotateZ(120deg));
+		@include transform-origin(50%,66.66%);
+
+		img {
+			@include transform(rotateX(-70.5deg));
+			@include animation( side-1 10.0s forwards infinite );
+			@include transform-origin(50%,100%);
+		}
+	}
+
+	.face--3 {
+		top:33.33%;
+		left:50%;
+	}
+
+	.face--4 {
+		top:66.66%;
+		left:50%;
+		@include transform(rotateX(70.5deg));
+		@include animation( side-2 10.0s forwards infinite );
+		@include transform-origin(50%,0%);
+
+		img {
+			clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+		}
+	}
+
+	.face--5 {
+		top:66.66%;
+		left:0%;
+		@include transform(rotateZ(120deg));
+		@include transform-origin(50%,33.33%);
+		img {
+			@include transform(rotateX(70.5deg));
+			@include animation( side-2 10.0s forwards infinite );
+			@include transform-origin(50%,0%);
+			clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+		}
+	}
+
+	.face--6 {
+		top: 66.5%;
+		left: 25%;
+	}
+
+	.face--7 {
+		left:50%;
+		top:50%;
+		transform: rotateZ(120deg);
+		@include transform-origin( 50%, 33.33% );
+		
+	}
+
+	.face--8 {
+		top:0%;
+		left:0%;
+		@include transform(rotateZ(120deg));
+		@include transform-origin(50%,33.33%);
+
+		img {
+			@include transform(rotateX(70.5deg));
+			@include animation( side-2 10.0s forwards infinite );
+			@include transform-origin(50%,0%);
+			clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+		}
+	}
+
+}
+
+@include keyframes(octa){
+	0% {
+		@include transform(rotateX(0deg) rotateY(0deg) rotateZ(0deg));
+	}
+	30% {
+		@include transform(rotateX(0deg) rotateY(0deg) rotateZ(0deg));
+	}
+	40% {
+		@include transform(rotateX(45deg) rotateY(0deg) rotateZ(45deg));
+	}
+	70% {
+		@include transform(rotateX(45deg) rotateY(0deg) rotateZ(45deg));
+	} 
+	90% {
+		@include transform(rotateX(120deg) rotateY(0deg) rotateZ(120deg));
+	}
+	100% {
+		@include transform(rotateX(0deg) rotateY(0deg) rotateZ(0deg));
+	}
+}
+
+@include keyframes(side-1){
+	0% {
+		@include transform(rotateX(0deg));
+	}
+	40% {
+		@include transform(rotateX(0deg));
+	}
+	50% {
+		@include transform(rotateX(-70.5deg));
+	} 
+	90% {
+		@include transform(rotateX(-70.5deg));
+	}
+	100% {
+		@include transform(rotateX(0deg));
+	}
+}
+
+@include keyframes(side-2){
+	0% {
+		@include transform(rotateX(0deg));
+	}
+	40% {
+		@include transform(rotateX(0deg));
+	}
+	50% {
+		@include transform(rotateX(70.5deg));
+	} 
+	90% {
+		@include transform(rotateX(70.5deg));
+	}
+	100% {
+		@include transform(rotateX(0deg));
+	}
+}
+
+@include keyframes(side-3){
+	0% {
+		@include transform(rotateX(0deg));
+	}
+	50% {
+		@include transform(rotateX(0deg));
+	}
+	60% {
+		@include transform(rotateX(70.5deg));
+	} 
+	90% {
+		@include transform(rotateX(70.5deg));
+	}
+	100% {
+		@include transform(rotateX(0deg));
+	}
+}
+
+@include keyframes(side-4){
+	0% {
+		@include transform(rotateX(0deg));
+	}
+	50% {
+		@include transform(rotateX(0deg));
+	}
+	60% {
+		@include transform(rotateX(-70.5deg));
+	} 
+	90% {
+		@include transform(rotateX(-70.5deg));
+	}
+	100% {
+		@include transform(rotateX(0deg));
+	}
+}
+
+@include keyframes(half-fold){
+	0% {
+		@include transform( rotateX(0deg));
+	}
+	60% {
+		@include transform( rotateX(0deg));
+	}
+	70% {
+		@include transform( rotateX(-70.5deg));
+	}
+	90% {
+		@include transform( rotateX(-70.5deg));
+	}
+	100% {
+		@include transform( rotateX(0deg));
+	}
+}
